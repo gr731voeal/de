@@ -220,7 +220,7 @@ router ospf
 ospf router-id 1.1.1.1
 passive-interface default
 network 10.10.0.0/30 area 0
-network 192.168.100.0/27 area 0
+network 192.168.100.0/26 area 0
 network 192.168.200.0/28 area 0
 area 0 authentication
 exit
