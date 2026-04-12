@@ -63,33 +63,11 @@ iptables -F
 iptables -X
 iptables -t nat -F
 iptables -t nat -X
-  
-iptables -P INPUT DROP
-iptables -P FORWARD ACCEPT
-iptables -P OUTPUT ACCEPT
-
-iptables -t nat -A POSTROUTING -s 172.16.1.0/29 -o ens192 -j MASQUERADE
-iptables -t nat -A POSTROUTING -s 172.16.2.0/29 -o ens192 -j MASQUERADE
-
-iptables -A FORWARD -s 172.16.1.0/29 -i any -o ens192 -j ACCEPT
-iptables -A FORWARD -s 172.16.2.0/29 -i any -o ens192 -j ACCEPT
-iptables -A FORWARD -s 172.16.1.0/29 -i ens192 -o any -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A FORWARD -s 172.16.2.0/29 -i ens192 -o any -m state --state ESTABLISHED,RELATED -j ACCEPT
-
-iptables-save > /etc/iptables/rules.v4
-
-
-#!/bin/bash
-iptables -F
-iptables -X
-iptables -t nat -F
-iptables -t nat -X
 
 iptables -P INPUT ACCEPT
 iptables -P FORWARD ACCEPT
 iptables -P OUTPUT ACCEPT
 
-#Dynamic network broadcast - task 2
 iptables -t nat -A POSTROUTING -s 172.16.1.0/28 -o ens192 -j MASQUERADE
 iptables -t nat -A POSTROUTING -s 172.16.2.0/28 -o ens192 -j MASQUERADE
 
@@ -97,7 +75,6 @@ iptables -A FORWARD -s 172.16.1.0/28 -i any -o ens192 -j ACCEPT
 iptables -A FORWARD -s 172.16.2.0/28 -i any -o ens192 -j ACCEPT
 iptables -A FORWARD -d 172.16.1.0/28 -i ens192 -o any -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A FORWARD -d 172.16.2.0/28 -i ens192 -o any -m state --state ESTABLISHED,RELATED -j ACCEPT
-
 </pre>
 
 <pre>
