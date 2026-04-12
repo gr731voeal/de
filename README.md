@@ -16,6 +16,11 @@
 </td>
 <td width="75%" valign="top">
 
+
+</td>
+</tr>
+</table>
+
 ## Таблица IP-адресации
 
 | Устройство | Интерфейс / Назначение | IP-адрес / Маска | Шлюз |
@@ -677,7 +682,3 @@ timedatectl set-timezone Asia/Tomsk
 <p align="center">
     <img width="553" height="386" alt="image" src="https://github.com/user-attachments/assets/d7246a28-74ee-45fa-a2ba-d67af781eb9d" />
 </p>
-
-</td>
-</tr>
-</table>
