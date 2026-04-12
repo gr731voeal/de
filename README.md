@@ -389,7 +389,7 @@ router ospf
     ospf router-id 2.2.2.2
     passive-interface default
     network 10.10.0.0/30 area 0
-    network 192.168.0.0/26 area 0
+    network 192.168.0.0/27 area 0
     area 0 authentication
     exit
 &#10;
