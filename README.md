@@ -158,7 +158,25 @@ endpoint 172.16.2.2
 ttl 64
 </pre>
 
+<pre>
+service networking restart
+</pre>
 
+<pre>
+apt install iptables iptables-persistent -y
+</pre>
+
+<p>nano /etc/iptables/iptables.sh</p>
+<pre>
+#!/bin/bash
+</pre>
+
+<pre>
+chmod +x /etc/iptables/iptables.sh
+/etc/iptables/iptables.sh
+systemctl restart iptables
+service networking restart
+</pre>
 
 
 
