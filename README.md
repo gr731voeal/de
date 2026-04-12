@@ -115,6 +115,7 @@ gateway 172.16.1.1
 <pre>apt install vlan -y
 modprobe 8021q
 echo 8021q >> /etc/modules
+echo ip_gre >> /etc/modules
 </pre>
 
 <p>nano /etc/network/interfaces</p>
@@ -147,8 +148,6 @@ address 192.168.200.3
 netmask 255.255.255.240 
 vlan-raw-device ens224:1
 </pre>
-
-<pre>echo ip_gre >> /etc/modules</pre>
 
 <p>nano /etc/network/interfaces</p>
 <pre>
