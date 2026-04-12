@@ -147,10 +147,7 @@ iface ens224.200 inet static
 address 192.168.200.3 
 netmask 255.255.255.240 
 vlan-raw-device ens224:1
-</pre>
-
-<p>nano /etc/network/interfaces</p>
-<pre>
+&#10;
 auto tun0 
 iface tun0 inet tunnel
 address 10.10.0.1 
