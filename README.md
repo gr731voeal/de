@@ -365,7 +365,10 @@ systemctl restart iptables
 service networking restart
 </pre>
 
-
+<pre>
+useradd -m -G sudo net_admin
+passwd net_admin
+</pre>
 
 
 
