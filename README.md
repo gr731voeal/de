@@ -99,7 +99,14 @@ newgrp
 timedatectl set-timezone Asia/Tomsk
 </pre>
 
-
+<p>nano /etc/network/interfaces</p>
+<pre>
+auto ens192
+iface ens192 inet static
+address 172.16.1.2
+netmask 255.255.255.240
+gateway 172.16.1.1
+</pre>
 
 
 
