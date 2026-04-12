@@ -5,10 +5,10 @@
 | **HQ-RTR** | к hq-srv | 192.168.100.1/26 | 172.16.1.1 |
 | | к hq-cli | 192.168.200.1/28 | |
 | | к isp | 172.16.1.2/28 | |
-| | gre к br-rtr | 10.10.10.1/30 | |
+| | gre к br-rtr | 10.10.0.1/30 | |
 | **BR-RTR** | к br-srv | 192.168.0.1/27 | 172.16.2.1 |
 | | к isp | 172.16.2.2/28 | |
-| | gre к hq-rtr | 10.10.10.2/30 | |
+| | gre к hq-rtr | 10.10.0.2/30 | |
 | **HQ-SRV** | к hq-rtr | 192.168.100.2/26 | 192.168.100.1 |
 | **BR-SRV** | к br-rtr | 192.168.0.2/27 | 192.168.0.1 |
 | **HQ-CLI** | к hq-rtr | 192.168.200.2/28 | 192.168.200.1 |
@@ -156,7 +156,7 @@ iface ens224.200 inet static
 auto tun0 
 iface tun0 inet tunnel
     address 10.10.0.1 
-    netmask 10.10.0.1
+    netmask 255.255.255.252
     mode gre 
     local 172.16.1.2
     endpoint 172.16.2.2 
@@ -310,6 +310,15 @@ auto ens224
 iface ens224 inet static
     address 192.168.0.1
     netmask 255.255.255.224
+&#10;
+auto tun0
+iface tun0 inet tunnel
+    address 10.10.0.2
+    netmask 255.255.255.252
+    mode gre
+    local 172.16.2.2
+    endpoint 172.16.1.2
+    ttl 64
 </pre>
 
 <pre>service networking restart</pre>
