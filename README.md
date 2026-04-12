@@ -47,7 +47,10 @@ netmask 255.255.255.240
 
 <pre>service networking restart</pre>
 
-
+<pre>
+echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+sysctl -p
+</pre>
 
 
 
