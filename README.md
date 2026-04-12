@@ -143,12 +143,24 @@ vlan-raw-device ens224
 &#10;
 auto ens224.200 
 iface ens224.200 inet static 
-address 192.157.200.3 
+address 192.168.200.3 
 netmask 255.255.255.240 
 vlan-raw-device ens224:1
 </pre>
 
+<p>echo ip_gre >> /etc/modules</p>
 
+<p>nano /etc/network/interfaces</p>
+<pre>
+auto tun0 
+iface tun0 inet tunnel
+address 10.10.0.1 
+netmask 10.10.0.1
+mode gre 
+local 172.16.1.2
+endpoint 172.16.2.2 
+ttl 64
+</pre>
 
 
 
