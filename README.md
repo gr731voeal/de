@@ -402,8 +402,11 @@ systemctl restart frr
 systemctl enable frr
 </pre>
 
-
-
+<p>Проверка</p>
+<pre>
+vtysh -c "show ip ospf neighbor"
+vtysh -c "show ip ospf route"
+</pre>
 
 
 
