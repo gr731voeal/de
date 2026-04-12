@@ -95,6 +95,16 @@ systemctl restart iptables
 service networking restart
 </pre>
 
+<p>Или же</p>
+<pre>
+iptables -t nat -A POSTROUTING -s 172.16.1.0/28 -o ens192 -j MASQUERADE
+iptables -t nat -A POSTROUTING -s 172.16.2.0/28 -o ens192 -j MASQUERADE
+iptables -A FORWARD -j ACCEPT
+
+apt install iptables-persistent -y
+netfilter-persistent save
+</pre>
+
 ## HQ-RTR
 
 <p>nano /etc/apt/sources.list</p>
@@ -212,6 +222,17 @@ chmod +x /etc/iptables/iptables.sh
 /etc/iptables/iptables.sh
 systemctl restart iptables
 service networking restart
+</pre>
+
+<p>Или же</p>
+<pre>
+iptables -t nat -A POSTROUTING -o ens192 -j MASQUERADE
+iptables -A FORWARD -j ACCEPT
+iptables -A INPUT -p gre -j ACCEPT
+iptables -A OUTPUT -p gre -j ACCEPT
+
+apt install iptables-persistent -y
+netfilter-persistent save
 </pre>
 
 <pre>
@@ -371,6 +392,17 @@ chmod +x /etc/iptables/iptables.sh
 /etc/iptables/iptables.sh
 systemctl restart iptables
 service networking restart
+</pre>
+
+<p>Или же</p>
+<pre>
+iptables -t nat -A POSTROUTING -o ens192 -j MASQUERADE
+iptables -A FORWARD -j ACCEPT
+iptables -A INPUT -p gre -j ACCEPT
+iptables -A OUTPUT -p gre -j ACCEPT
+
+apt install iptables-persistent -y
+netfilter-persistent save
 </pre>
 
 <pre>
