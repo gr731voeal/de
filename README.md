@@ -36,14 +36,13 @@ timedatectl set-timezone Asia/Tomsk
 <pre>
 auto ens192
 iface ens192 inet static
-    address 172.16.1.1
-    netmask 255.255.255.240
-</pre>
-<pre>
+address 172.16.1.1
+netmask 255.255.255.240
+
 auto ens224
 iface ens224 inet static
-    address 172.16.2.1
-    netmask 255.255.255.240
+address 172.16.2.1
+netmask 255.255.255.240
 </pre>
 
 <pre>service networking restart</pre>
