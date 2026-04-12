@@ -650,5 +650,5 @@ timedatectl set-timezone Asia/Tomsk
 
 <pre>service networking restart</pre>
 
-<p>nano resolv.conf (если DHCP не передает DNS)</p>
+<p>nano /etc/resolv.conf (если DHCP не передает DNS)</p>
 <pre>nameserver 192.168.100.2</pre>
