@@ -205,7 +205,7 @@ ospfd=yes
 
 <pre>service frr restart</pre>
 
-<p>nano /etc/frr/frr.conf</p>
+<pre>vtysh</pre>
 <pre>
 configure terminal
 &#10;
