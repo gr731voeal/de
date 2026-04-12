@@ -135,7 +135,7 @@ iface ens224:1 inet static
     address 192.168.200.1
     netmask 255.255.255.240
 &#10;
-auto ens224 
+auto ens224.100
 iface ens224 inet static 
     address 192.168.100.3
     netmask 255.255.255.192
