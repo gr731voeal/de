@@ -59,6 +59,7 @@ apt install iptables iptables-persistent -y
 <p>nano /etc/iptables/iptables.sh</p>
 <pre>
 #!/bin/bash
+&#10;
 iptables -F
 iptables -X
 iptables -t nat -F
@@ -158,9 +159,7 @@ endpoint 172.16.2.2
 ttl 64
 </pre>
 
-<pre>
-service networking restart
-</pre>
+<pre>service networking restart</pre>
 
 <pre>
 apt install iptables iptables-persistent -y
@@ -169,6 +168,24 @@ apt install iptables iptables-persistent -y
 <p>nano /etc/iptables/iptables.sh</p>
 <pre>
 #!/bin/bash
+&#10;
+iptables -F 
+iptables -X
+iptables -t nat -F 
+iptables -t nat -X
+&#10;
+iptables -P INPUT ACCEPT
+iptables -P FORWARD ACCEPT 
+iptables -P OUTPUT ACCEPT
+&#10;
+iptables -t nat -A POSTROUTING -o ens192 -j MASQUERADE
+&#10;
+iptables -A FORWARD -i ens224.100 -o ens192 -m conntrack --ctstate NEW,ESTABLISHED,RELATED -j ACCEPT 
+iptables -A FORWARD -i ens224.200 -o ens192 -m conntrack --ctstate NEW,ESTABLISHED,RELATED -j ACCEPT 
+iptables -A FORWARD -i ens192 -o ens224.100 -m conntrack --ctstate NEW,ESTABLISHED,RELATED -j ACCEPT 
+iptables -A FORWARD -i ens192 -o ens224.200 -m conntrack --ctstate NEW,ESTABLISHED,RELATED -j ACCEPT
+&#10;
+iptables-save > /etc/iptables/rules.v4
 </pre>
 
 <pre>
