@@ -323,7 +323,35 @@ iface tun0 inet tunnel
 
 <pre>service networking restart</pre>
 
+<pre>
+apt install iptables iptables-persistent -y
+</pre>
 
+<p>nano /etc/iptables/iptables.sh</p>
+<pre>
+#!/bin/bash
+&#10;
+iptables -F 
+iptables -X
+iptables -t nat -F 
+iptables -t nat -X
+&#10;
+iptables -P INPUT ACCEPT
+iptables -P FORWARD ACCEPT 
+iptables -P OUTPUT ACCEPT
+&#10;
+iptables -A FORWARD -i ens224 -o ens192 -m conntrack --ctstate NEW,ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -i ens192 -o ens224 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+&#10;
+iptables-save > /etc/iptables/rules.v4
+</pre>
+
+<pre>
+chmod +x /etc/iptables/iptables.sh
+/etc/iptables/iptables.sh
+systemctl restart iptables
+service networking restart
+</pre>
 
 
 
