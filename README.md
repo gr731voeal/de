@@ -21,3 +21,40 @@
 <p>Прописать в /etc/resolv.conf nameserver 8.8.8.8 и nameserver 192.168.100.2 для DNS сервера на HQ-SRV</p>
 
 ## ISP
+
+## HQ-RTR
+
+<pre>
+auto lo
+iface lo inet loopback
+
+auto ens192
+iface ens192 inet static
+    address 172.16.1.2
+    netmask 255.255.255.240
+    gateway 172.16.1.1
+
+auto ens224
+iface ens224 inet static
+    address 192.168.100.1
+    netmask 255.255.255.192
+
+auto ens224:1
+iface ens224:1 inet static
+    address 192.168.200.1
+    netmask 255.255.255.240
+
+auto ens224.100
+iface ens224.100 inet static
+    address 192.168.100.3
+    netmask 255.255.255.192
+    vlan-raw-device ens224
+
+auto ens224.200
+iface ens224.200 inet static
+    address 192.157.200.3
+    netmask 255.255.255.240
+    vlan-raw-device ens224:1
+</pre>
+
+## BR-RTR
