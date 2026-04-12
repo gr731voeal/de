@@ -15,58 +15,19 @@
 | **ISP** | к hq-rtr | 172.16.1.1/28 | |
 | | к br-rtr | 172.16.2.1/28 | |
 
-## На каждой машине
+## ISP
 
 <p>/etc/apt/sources.list</p>
-<pre>
-Отключить диск
-</pre>
+<pre>Отключить диск</pre>
 
-<p>/etc/resolv.conf</p>
+<p>etc/resolv.conf</p>
 <pre>
 nameserver 8.8.8.8
 nameserver 192.168.100.2
 </pre>
 
 <pre>
-hostnamectl set-hostname (имя машины).au-team.irpo
+hostnamectl set-hostname isp.au-team.irpo
 newgrp
 timedatectl set-timezone Asia/Tomsk
 </pre>
-
-## ISP
-
-## HQ-RTR
-<p>/etc/network/interfaces</p>
-<pre>
-auto ens192
-iface ens192 inet static
-    address 172.16.1.2
-    netmask 255.255.255.240
-    gateway 172.16.1.1
-</pre>
-<pre>
-auto ens224
-iface ens224 inet static
-    address 192.168.100.1
-    netmask 255.255.255.192
-
-auto ens224:1
-iface ens224:1 inet static
-    address 192.168.200.1
-    netmask 255.255.255.240
-
-auto ens224.100
-iface ens224.100 inet static
-    address 192.168.100.3
-    netmask 255.255.255.192
-    vlan-raw-device ens224
-
-auto ens224.200
-iface ens224.200 inet static
-    address 192.168.200.3
-    netmask 255.255.255.240
-    vlan-raw-device ens224:1
-</pre>
-
-## BR-RTR
