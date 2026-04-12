@@ -23,7 +23,7 @@
 ## ISP
 
 ## HQ-RTR
-<p><strong>1. HQ-RTR - Конфиг интерфейсов (/etc/network/interfaces)</strong></p>
+<p>/etc/network/interfaces</p>
 <pre>
 auto lo
 iface lo inet loopback
