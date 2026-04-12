@@ -39,9 +39,6 @@ timedatectl set-timezone Asia/Tomsk
 ## HQ-RTR
 <p>/etc/network/interfaces</p>
 <pre>
-auto lo
-iface lo inet loopback
-
 auto ens192
 iface ens192 inet static
     address 172.16.1.2
@@ -66,7 +63,7 @@ iface ens224.100 inet static
 
 auto ens224.200
 iface ens224.200 inet static
-    address 192.157.200.3
+    address 192.168.200.3
     netmask 255.255.255.240
     vlan-raw-device ens224:1
 </pre>
