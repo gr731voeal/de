@@ -271,11 +271,6 @@ systemctl restart isc-dhcp-server
 systemctl enable isc-dhcp-server
 </pre>
 
-<pre>
-useradd -m -G sudo net_admin
-passwd net_admin
-</pre>
-
 ## BR-RTR
 
 <p>nano /etc/apt/sources.list</p>
@@ -370,7 +365,42 @@ useradd -m -G sudo net_admin
 passwd net_admin
 </pre>
 
+<pre>apt install rfr</pre>
 
+<p>nano /etc/frr/daemons</p>
+<pre>
+ospfd=yes
+</pre>
+
+<pre>service frr restart</pre>
+
+<pre>vtysh</pre>
+<pre>
+configure terminal
+&#10;
+interface tun0
+    ip ospf authentication
+    ip ospf authentication-key P@ssw0rd
+    no ip ospf network broadcast
+    no ip ospf passive
+    exit
+&#10;
+router ospf
+    ospf router-id 2.2.2.2
+    passive-interface default
+    network 10.10.0.0/30 area 0
+    network 192.168.0.0/26 area 0
+    area 0 authentication
+    exit
+&#10;
+end
+write memory
+</pre>
+
+<pre>
+systemctl restart frr
+systemctl enable frr
+</pre>
 
 
 
