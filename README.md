@@ -187,6 +187,11 @@ iptables -A FORWARD -i ens224.200 -o ens192 -m conntrack --ctstate NEW,ESTABLISH
 iptables -A FORWARD -i ens192 -o ens224.100 -m conntrack --ctstate NEW,ESTABLISHED,RELATED -j ACCEPT 
 iptables -A FORWARD -i ens192 -o ens224.200 -m conntrack --ctstate NEW,ESTABLISHED,RELATED -j ACCEPT
 &#10;
+iptables -A FORWARD -i tun0 -o ens224 -j ACCEPT
+iptables -A FORWARD -i ens224 -o tun0 -j ACCEPT
+iptables -A FORWARD -i tun0 -o ens224:1 -j ACCEPT
+iptables -A FORWARD -i ens224:1 -o tun0 -j ACCEPT
+&#10;
 iptables-save > /etc/iptables/rules.v4
 </pre>
 
@@ -339,6 +344,8 @@ iptables -t nat -X
 iptables -P INPUT ACCEPT
 iptables -P FORWARD ACCEPT 
 iptables -P OUTPUT ACCEPT
+&#10;
+iptables -t nat -A POSTROUTING -o ens192 -j MASQUERADE
 &#10;
 iptables -A FORWARD -i ens224 -o ens192 -m conntrack --ctstate NEW,ESTABLISHED,RELATED -j ACCEPT
 iptables -A FORWARD -i ens192 -o ens224 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
