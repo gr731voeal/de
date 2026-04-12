@@ -207,7 +207,7 @@ useradd -m -G sudo net_admin
 passwd net_admin
 </pre>
 
-<pre>apt install rfr</pre>
+<pre>apt install frr</pre>
 
 <p>nano /etc/frr/daemons</p>
 <pre>
@@ -230,6 +230,7 @@ interface tun0
 router ospf
     ospf router-id 1.1.1.1
     passive-interface default
+    no passive-interface tun0
     network 10.10.0.0/30 area 0
     network 192.168.100.0/27 area 0
     network 192.168.200.0/28 area 0
@@ -345,8 +346,8 @@ iptables -t nat -A POSTROUTING -o ens192 -j MASQUERADE
 iptables -A FORWARD -i ens224 -o ens192 -m conntrack --ctstate NEW,ESTABLISHED,RELATED -j ACCEPT
 iptables -A FORWARD -i ens192 -o ens224 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 &#10;
-iptables -A INPUT -p gre -s 172.16.2.2 -d 172.16.1.2 -j ACCEPT
-iptables -A OUTPUT -p gre -s 172.16.1.2 -d 172.16.2.2 -j ACCEPT
+iptables -A INPUT -p gre -s 172.16.1.2 -d 172.16.2.2 -j ACCEPT
+iptables -A OUTPUT -p gre -s 172.16.2.2 -d 172.16.2.1 -j ACCEPT
 iptables -A FORWARD -i tun0 -j ACCEPT
 iptables -A FORWARD -o tun0 -j ACCEPT
 &#10;
@@ -365,7 +366,7 @@ useradd -m -G sudo net_admin
 passwd net_admin
 </pre>
 
-<pre>apt install rfr</pre>
+<pre>apt install frr</pre>
 
 <p>nano /etc/frr/daemons</p>
 <pre>
@@ -388,6 +389,7 @@ interface tun0
 router ospf
     ospf router-id 2.2.2.2
     passive-interface default
+    no passive-interface tun0
     network 10.10.0.0/30 area 0
     network 192.168.0.0/28 area 0
     area 0 authentication
