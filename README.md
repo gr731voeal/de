@@ -28,9 +28,11 @@ nameserver 8.8.8.8
 nameserver 192.168.100.2
 </pre>
 
-<p>hostnamectl set-hostname (имя машины).au-team.irpo</p>
-<p>newgrp</p>
-<p>timedatectl set-timezone Asia/Tomsk</p>
+<pre>
+hostnamectl set-hostname (имя машины).au-team.irpo
+newgrp
+timedatectl set-timezone Asia/Tomsk
+</pre>
 
 ## ISP
 
