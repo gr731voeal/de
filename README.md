@@ -15,4 +15,9 @@
 | **ISP** | к hq-rtr | 172.16.1.1/28 | |
 | | к br-rtr | 172.16.2.1/28 | |
 
+## На каждой машине
+
+Отключить в /etc/apt/sources.list диск
+Прописать в /etc/resolv.conf nameserver 8.8.8.8 и nameserver 192.168.100.2 для DNS сервера на HQ-SRV
+
 ## ISP
