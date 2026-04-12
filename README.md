@@ -112,9 +112,10 @@ gateway 172.16.1.1
 <pre>service networking restart</pre>
 
 <pre>apt install vlan -y
-modprobe 8021q
 echo 8021q >> /etc/modules
+modprobe 8021q
 echo ip_gre >> /etc/modules
+modprobe ip_gre
 </pre>
 
 <p>nano /etc/network/interfaces</p>
@@ -280,6 +281,11 @@ nameserver 192.168.100.2
 hostnamectl set-hostname br-rtr.au-team.irpo
 newgrp
 timedatectl set-timezone Asia/Tomsk
+</pre>
+
+<pre>
+echo ip_gre >> /etc/modules
+modprobe ip_gre
 </pre>
 
 <p>nano /etc/network/interfaces</p>
