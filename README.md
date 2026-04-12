@@ -149,12 +149,12 @@ iface ens224.200 inet static
 &#10;
 auto tun0 
 iface tun0 inet tunnel
-address 10.10.0.1 
-netmask 10.10.0.1
-mode gre 
-local 172.16.1.2
-endpoint 172.16.2.2 
-ttl 64
+    address 10.10.0.1 
+    netmask 10.10.0.1
+    mode gre 
+    local 172.16.1.2
+    endpoint 172.16.2.2 
+    ttl 64
 </pre>
 
 <pre>service networking restart</pre>
@@ -210,20 +210,20 @@ ospfd=yes
 configure terminal
 &#10;
 interface tun0
-ip ospf authentication
-ip ospf authentication-key P@ssw0rd
-no ip ospf network broadcast
-no ip ospf passive
-exit
+    ip ospf authentication
+    ip ospf authentication-key P@ssw0rd
+    no ip ospf network broadcast
+    no ip ospf passive
+    exit
 &#10;
 router ospf
-ospf router-id 1.1.1.1
-passive-interface default
-network 10.10.0.0/30 area 0
-network 192.168.100.0/26 area 0
-network 192.168.200.0/28 area 0
-area 0 authentication
-exit
+    ospf router-id 1.1.1.1
+    passive-interface default
+    network 10.10.0.0/30 area 0
+    network 192.168.100.0/26 area 0
+    network 192.168.200.0/28 area 0
+    area 0 authentication
+    exit
 &#10;
 end
 write memory
