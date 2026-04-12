@@ -22,8 +22,8 @@
 
 <p>nano etc/resolv.conf</p>
 <pre>
-nameserver 8.8.8.8
 nameserver 192.168.100.2
+nameserver 8.8.8.8
 </pre>
 
 <pre>
@@ -90,8 +90,8 @@ service networking restart
 
 <p>nano etc/resolv.conf</p>
 <pre>
-nameserver 8.8.8.8
 nameserver 192.168.100.2
+nameserver 8.8.8.8
 </pre>
 
 <pre>
@@ -279,8 +279,8 @@ systemctl enable isc-dhcp-server
 
 <p>nano etc/resolv.conf</p>
 <pre>
-nameserver 8.8.8.8
 nameserver 192.168.100.2
+nameserver 8.8.8.8
 </pre>
 
 <pre>
@@ -410,12 +410,245 @@ vtysh -c "show ip ospf neighbor"
 vtysh -c "show ip ospf route"
 </pre>
 
+## HQ-SRV
 
+<p>nano /etc/apt/sources.list</p>
+<pre>Отключить диск</pre>
 
+<p>nano etc/resolv.conf</p>
+<pre>
+nameserver 127.0.0.1
+nameserver 8.8.8.8
+</pre>
 
+<pre>
+hostnamectl set-hostname hq-srv.au-team.irpo
+newgrp
+timedatectl set-timezone Asia/Tomsk
+</pre>
 
+<p>nano /etc/network/interfaces</p>
+<pre>
+auto ens192
+iface ens192 inet static
+    address 192.168.100.2
+    netmask 255.255.255.224
+    gateway 192.168.100.1
+</pre>
 
+<pre>service networking restart</pre>
 
+<p>nano /etc/hosts</p>
+<pre>
+127.0.1.1        hq-srv.au-team.irpo
+192.168.100.2    hq-srv.au-team.irpo
+</pre>
 
+<pre>
+apt update
+apt install bind9 bind9utils bind9-doc dnsutils -y
+</pre>
 
+<pre>
+cp /etc/bind/db.local /etc/bind/db.au-team.irpo
+cp /etc/bind/db.127 /etc/bind/db.192.168.100
+cp /etc/bind/db.127 /etc/bind/db.192.168.0
+cp /etc/bind/db.127 /etc/bind/db.192.168.200
+</pre>
+    
+<p>nano /etc/bind/named.conf.options</p>
+<pre>
+forwarders {
+        8.8.8.8;
+        8.8.4.4;
+        77.88.8.7;
+        77.88.8.3;
+    };
+</pre>
 
+<p>nano /etc/bind/named.conf.local</p>
+<pre>
+zone "au-team.irpo" {
+    type master;
+    file "/etc/bind/db.au-team.irpo";
+};
+
+zone "100.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/db.192.168.100";
+};
+
+zone "0.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/db.192.168.0";
+};
+
+zone "200.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/db.192.168.200";
+};
+</pre>
+
+<p>nano /etc/bind/db.au-team.irpo</p>
+<pre>
+$TTL    604800
+@       IN      SOA     hq-srv.au-team.irpo. admin.au-team.irpo. (
+                  2026041201  ; Serial
+                        604800  ; Refresh
+                         86400  ; Retry
+                       2419200  ; Expire
+                        604800 ) ; Negative Cache TTL
+
+@       IN      NS      hq-srv.au-team.irpo.
+
+; A Records
+hq-rtr  IN      A       192.168.100.1
+br-rtr  IN      A       192.168.0.1
+hq-srv  IN      A       192.168.100.2
+hq-cli  IN      A       192.168.200.2
+br-srv  IN      A       192.168.0.2
+docker  IN      A       172.16.1.1
+web     IN      A       172.16.2.1
+</pre>
+
+<p>nano /etc/bind/db.192.168.100</p>
+<pre>
+$TTL    604800
+@       IN      SOA     hq-srv.au-team.irpo. admin.au-team.irpo. (
+                  2026041201  ; Serial
+                        604800  ; Refresh
+                         86400  ; Retry
+                       2419200  ; Expire
+                        604800 ) ; Negative Cache TTL
+
+@       IN      NS      hq-srv.au-team.irpo.
+
+1       IN      PTR     hq-rtr.au-team.irpo.
+2       IN      PTR     hq-srv.au-team.irpo.
+</pre>
+
+<p>nano /etc/bind/db.192.168.0</p>
+<pre>
+$TTL    604800
+@       IN      SOA     hq-srv.au-team.irpo. admin.au-team.irpo. (
+                  2026041201  ; Serial
+                        604800  ; Refresh
+                         86400  ; Retry
+                       2419200  ; Expire
+                        604800 ) ; Negative Cache TTL
+
+@       IN      NS      hq-srv.au-team.irpo.
+
+1       IN      PTR     br-rtr.au-team.irpo.
+2       IN      PTR     br-srv.au-team.irpo.
+</pre>
+
+<p>nano /etc/bind/db.192.168.200</p>
+<pre>
+$TTL    604800
+@       IN      SOA     hq-srv.au-team.irpo. admin.au-team.irpo. (
+                  2026041201  ; Serial
+                        604800  ; Refresh
+                         86400  ; Retry
+                       2419200  ; Expire
+                        604800 ) ; Negative Cache TTL
+
+@       IN      NS      hq-srv.au-team.irpo.
+
+2       IN      PTR     hq-cli.au-team.irpo.
+</pre>
+
+<pre>
+systemctl restart bind9
+systemctl enable bind9
+systemctl status bind9
+</pre>
+
+<p>Проверка</p>
+<pre>
+host hq-rtr.au-team.irpo
+host br-srv.au-team.irpo
+host 192.168.100.1
+host 192.168.0.2
+</pre>
+
+<pre>
+useradd -m -u 2026 -G sudo sshuser
+passwd sshuser
+</pre>
+
+<p>nano /etc/ssh/sshd_config</p>
+<pre>
+Port 2026
+PermitRootLogin no
+PasswordAuthentication yes
+AllowUsers sshuser
+MaxAuthTries 2
+Banner /etc/ssh/bannermotd
+</pre>
+
+<p>nano /etc/ssh/bannermotd</p>
+<pre>Authorized access only</pre>
+
+<pre>service sshd restart</pre>
+
+## BR-SRV
+
+<p>nano /etc/apt/sources.list</p>
+<pre>Отключить диск</pre>
+
+<p>nano etc/resolv.conf</p>
+<pre>
+nameserver 192.168.100.2
+nameserver 8.8.8.8
+</pre>
+
+<pre>
+hostnamectl set-hostname br-srv.au-team.irpo
+newgrp
+timedatectl set-timezone Asia/Tomsk
+</pre>
+
+<p>nano /etc/network/interfaces</p>
+<pre>
+auto ens192
+iface ens192 inet static
+    address 192.168.0.2
+    netmask 255.255.255.224
+    gateway 192.168.0.1
+</pre>
+
+<pre>service networking restart</pre>
+
+<pre>
+useradd -m -u 2026 -G sudo sshuser
+passwd sshuser
+</pre>
+
+<p>nano /etc/ssh/sshd_config</p>
+<pre>
+Port 2026
+PermitRootLogin no
+PasswordAuthentication yes
+AllowUsers sshuser
+MaxAuthTries 2
+Banner /etc/ssh/bannermotd
+</pre>
+
+<p>nano /etc/ssh/bannermotd</p>
+<pre>Authorized access only</pre>
+
+<pre>service sshd restart</pre>
+
+## HQ-CLI
+
+<pre>
+hostnamectl set-hostname hq-cli.au-team.irpo
+newgrp
+timedatectl set-timezone Asia/Tomsk
+</pre>
+
+<pre>service networking restart</pre>
+
+<p>nano resolv.conf (если DHCP не передает DNS)</p>
+<pre>nameserver 192.168.100.2</pre>
