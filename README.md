@@ -32,6 +32,11 @@ newgrp
 timedatectl set-timezone Asia/Tomsk
 </pre>
 
+<pre>
+echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+sysctl -p
+</pre>
+
 <p>nano /etc/network/interfaces</p>
 <pre>
 auto ens224
@@ -46,11 +51,6 @@ iface ens256 inet static
 </pre>
 
 <pre>service networking restart</pre>
-
-<pre>
-echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
-sysctl -p
-</pre>
 
 <pre>apt install iptables iptables-persistent -y</pre>
 
@@ -98,6 +98,11 @@ nameserver 192.168.100.2
 hostnamectl set-hostname hq-rtr.au-team.irpo
 newgrp
 timedatectl set-timezone Asia/Tomsk
+</pre>
+
+<pre>
+echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+sysctl -p
 </pre>
 
 <p>nano /etc/network/interfaces</p>
@@ -281,6 +286,11 @@ nameserver 192.168.100.2
 hostnamectl set-hostname br-rtr.au-team.irpo
 newgrp
 timedatectl set-timezone Asia/Tomsk
+</pre>
+
+<pre>
+echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+sysctl -p
 </pre>
 
 <pre>
