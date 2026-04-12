@@ -654,7 +654,7 @@ timedatectl set-timezone Asia/Tomsk
 <pre>nameserver 192.168.100.2</pre>
 
 
-##
+## По просьбе сильно желающих
 
 <p align="center">
     <img width="553" height="386" alt="image" src="https://github.com/user-attachments/assets/d7246a28-74ee-45fa-a2ba-d67af781eb9d" />
