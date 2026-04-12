@@ -148,7 +148,7 @@ netmask 255.255.255.240
 vlan-raw-device ens224:1
 </pre>
 
-<p>echo ip_gre >> /etc/modules</p>
+<pre>echo ip_gre >> /etc/modules</pre>
 
 <p>nano /etc/network/interfaces</p>
 <pre>
