@@ -17,7 +17,10 @@
 
 ## На каждой машине
 
-<p>Отключить в /etc/apt/sources.list диск</p>
+<p>/etc/apt/sources.list</p>
+<pre>
+    Отключить диск
+</pre>
 <p>Прописать в /etc/resolv.conf nameserver 8.8.8.8 и nameserver 192.168.100.2 для DNS сервера на HQ-SRV</p>
 <p>hostnamectl set-hostname (имя машины).au-team.irpo</p>
 <p>newgrp</p>
