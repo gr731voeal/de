@@ -347,7 +347,7 @@ iptables -A FORWARD -i ens224 -o ens192 -m conntrack --ctstate NEW,ESTABLISHED,R
 iptables -A FORWARD -i ens192 -o ens224 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 &#10;
 iptables -A INPUT -p gre -s 172.16.1.2 -d 172.16.2.2 -j ACCEPT
-iptables -A OUTPUT -p gre -s 172.16.2.2 -d 172.16.2.1 -j ACCEPT
+iptables -A OUTPUT -p gre -s 172.16.2.2 -d 172.16.1.2 -j ACCEPT
 iptables -A FORWARD -i tun0 -j ACCEPT
 iptables -A FORWARD -o tun0 -j ACCEPT
 &#10;
