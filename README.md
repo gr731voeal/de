@@ -38,7 +38,7 @@ auto ens224
 iface ens224 inet static
 address 172.16.1.1
 netmask 255.255.255.240
-
+&#10;
 auto ens256
 iface ens256 inet static
 address 172.16.2.1
@@ -63,14 +63,14 @@ iptables -F
 iptables -X
 iptables -t nat -F
 iptables -t nat -X
-
+&#10;
 iptables -P INPUT ACCEPT
 iptables -P FORWARD ACCEPT
 iptables -P OUTPUT ACCEPT
-
+&#10;
 iptables -t nat -A POSTROUTING -s 172.16.1.0/28 -o ens192 -j MASQUERADE
 iptables -t nat -A POSTROUTING -s 172.16.2.0/28 -o ens192 -j MASQUERADE
-
+&#10;
 iptables -A FORWARD -s 172.16.1.0/28 -i any -o ens192 -j ACCEPT
 iptables -A FORWARD -s 172.16.2.0/28 -i any -o ens192 -j ACCEPT
 iptables -A FORWARD -d 172.16.1.0/28 -i ens192 -o any -m state --state ESTABLISHED,RELATED -j ACCEPT
@@ -124,24 +124,28 @@ iface ens192 inet static
 address 172.16.1.2
 netmask 255.255.255.240
 gateway 172.16.1.1
-
+&#10;
 auto ens224 
 iface ens224 inet static 
 address 192.168.100.1 
 netmask 255.255.255.192
-
+&#10;
 auto ens224:1 
 iface ens224:1 inet static 
 address 192.168.200.1 
 netmask 255.255.255.240
-
+&#10;
 auto ens224.100 
 iface ens224.100 inet static 
-  address 192.168.100.3 
-  netmask 255.255.255.192 
-  vlan-raw-device ens224
-
-auto ens224.200 iface ens224.200 inet static address 192.157.200.3 netmask 255.255.255.240 vlan-raw-device ens224:1
+address 192.168.100.3 
+netmask 255.255.255.192 
+vlan-raw-device ens224
+&#10;
+auto ens224.200 
+iface ens224.200 inet static 
+address 192.157.200.3 
+netmask 255.255.255.240 
+vlan-raw-device ens224:1
 </pre>
 
 
