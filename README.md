@@ -255,5 +255,59 @@ subnet 192.168.200.0 netmask 255.255.255.240 {
 }
 </pre>
 
+<pre>
+systemctl restart isc-dhcp-server
+systemctl enable isc-dhcp-server
+</pre>
+
+<pre>
+useradd -m -G sudo net_admin
+passwd net_admin
+</pre>
+
+## BR-RTR
+
+<p>nano /etc/apt/sources.list</p>
+<pre>Отключить диск</pre>
+
+<p>nano etc/resolv.conf</p>
+<pre>
+nameserver 8.8.8.8
+nameserver 192.168.100.2
+</pre>
+
+<pre>
+hostnamectl set-hostname br-rtr.au-team.irpo
+newgrp
+timedatectl set-timezone Asia/Tomsk
+</pre>
+
+<p>nano /etc/network/interfaces</p>
+<pre>
+auto ens192
+iface ens192 inet static
+address 172.16.2.2
+netmask 255.255.255.240
+gateway 172.16.2.1
+</pre>
+
+<pre>service networking restart</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
