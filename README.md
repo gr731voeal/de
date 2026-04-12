@@ -110,6 +110,12 @@ netmask 255.255.255.240
 gateway 172.16.1.1
 </pre>
 
+<pre>apt install vlan -y
+modprobe 8021q
+echo 8021q >> /etc/modules
+</pre>
+
+
 
 
 
