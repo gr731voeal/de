@@ -109,9 +109,9 @@ sysctl -p
 <pre>
 auto ens192
 iface ens192 inet static
-address 172.16.1.2
-netmask 255.255.255.240
-gateway 172.16.1.1
+    address 172.16.1.2
+    netmask 255.255.255.240
+    gateway 172.16.1.1
 </pre>
 
 <pre>service networking restart</pre>
@@ -134,7 +134,7 @@ iface ens192 inet static
 auto ens224 
 iface ens224 inet static 
     address 192.168.100.1 
-    netmask 255.255.255.192
+    netmask 255.255.255.224
 &#10;
 auto ens224:1
 iface ens224:1 inet static
@@ -144,7 +144,7 @@ iface ens224:1 inet static
 auto ens224.100
 iface ens224 inet static 
     address 192.168.100.3
-    netmask 255.255.255.192
+    netmask 255.255.255.224
     vlan-raw-device ens224
 &#10;
 auto ens224.200 
@@ -231,7 +231,7 @@ router ospf
     ospf router-id 1.1.1.1
     passive-interface default
     network 10.10.0.0/30 area 0
-    network 192.168.100.0/26 area 0
+    network 192.168.100.0/27 area 0
     network 192.168.200.0/28 area 0
     area 0 authentication
     exit
