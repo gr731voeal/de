@@ -1,11 +1,20 @@
-- [Таблица IP-адресации](#таблица-ip-адресации)
-- [ISP](#isp)
-- [HQ-RTR](#hq-rtr)
-- [BR-RTR](#br-rtr)
-- [HQ-SRV](#hq-srv)
-- [BR-SRV](#br-srv)
-- [HQ-CLI](#hq-cli)
-- [Картинка](#по-просьбе-сильно-желающих)
+<table width="100%">
+<tr>
+<td width="25%" valign="top">
+
+## Навигация
+
+• [Таблица IP-адресации](#таблица-ip-адресации)<br>
+• [ISP](#isp)<br>
+• [HQ-RTR](#hq-rtr)<br>
+• [BR-RTR](#br-rtr)<br>
+• [HQ-SRV](#hq-srv)<br>
+• [BR-SRV](#br-srv)<br>
+• [HQ-CLI](#hq-cli)<br>
+• [Картинка](#по-просьбе-сильно-желающих)
+
+</td>
+<td width="75%" valign="top">
 
 ## Таблица IP-адресации
 
@@ -668,3 +677,7 @@ timedatectl set-timezone Asia/Tomsk
 <p align="center">
     <img width="553" height="386" alt="image" src="https://github.com/user-attachments/assets/d7246a28-74ee-45fa-a2ba-d67af781eb9d" />
 </p>
+
+</td>
+</tr>
+</table>
