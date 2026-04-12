@@ -34,14 +34,13 @@ timedatectl set-timezone Asia/Tomsk
 
 <p>nano /etc/network/interfaces</p>
 <pre>
-auto ens192
-iface ens192 inet static
+auto ens224
+iface ens224 inet static
 address 172.16.1.1
 netmask 255.255.255.240
 
-
-auto ens224
-iface ens224 inet static
+auto ens256
+iface ens256 inet static
 address 172.16.2.1
 netmask 255.255.255.240
 </pre>
@@ -69,12 +68,14 @@ iptables -P INPUT DROP
 iptables -P FORWARD ACCEPT
 iptables -P OUTPUT ACCEPT
 
-iptables -A INPUT -i lo -j ACCEPT
-iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-iptables -A INPUT -p icmp -j ACCEPT
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-iptables -A FORWARD -i ens192 -o ens224 -j ACCEPT
-iptables -A FORWARD -i ens224 -o ens192 -j ACCEPT
+iptables -t nat -A POSTROUTING -s 172.16.1.0/29 -o ens192 -j MASQUERADE
+iptables -t nat -A POSTROUTING -s 172.16.2.0/29 -o ens192 -j MASQUERADE
+
+iptables -A FORWARD -s 172.16.1.0/29 -i any -o ens192 -j ACCEPT
+iptables -A FORWARD -s 172.16.2.0/29 -i any -o ens192 -j ACCEPT
+iptables -A FORWARD -s 172.16.1.0/29 -i ens192 -o any -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -s 172.16.2.0/29 -i ens192 -o any -m state --state ESTABLISHED,RELATED -j ACCEPT
+
 iptables-save > /etc/iptables/rules.v4
 </pre>
 
