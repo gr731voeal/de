@@ -17,7 +17,7 @@
 
 ## На каждой машине
 
-Отключить в /etc/apt/sources.list диск
-Прописать в /etc/resolv.conf nameserver 8.8.8.8 и nameserver 192.168.100.2 для DNS сервера на HQ-SRV
+<p>Отключить в /etc/apt/sources.list диск</p>
+<p>Прописать в /etc/resolv.conf nameserver 8.8.8.8 и nameserver 192.168.100.2 для DNS сервера на HQ-SRV</p>
 
 ## ISP
