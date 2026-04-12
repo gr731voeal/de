@@ -1,4 +1,4 @@
-<!-- <p align="center">
+<p align="center">
   <b>Навигация:</b><br><br>
   <a href="#таблица-ip-адресации">IP Table</a> &nbsp;|&nbsp;
   <a href="#isp">ISP</a> &nbsp;|&nbsp;
@@ -8,24 +8,7 @@
   <a href="#br-srv">BR-SRV</a> &nbsp;|&nbsp;
   <a href="#hq-cli">HQ-CLI</a> &nbsp;|&nbsp;
   <a href="#по-просьбе-сильно-желающих">Картинка</a>
-</p> -->
-<details>
-<summary><b>📑 Навигация по документу</b></summary>
-
-<br>
-
-| Раздел | Описание |
-|--------|----------|
-| [📊 Таблица IP-адресации](#таблица-ip-адресации) | Схема адресации |
-| [🌐 ISP](#isp) | ISP |
-| [🏢 HQ-RTR](#hq-rtr) | Маршрутизатор HQ |
-| [🏭 BR-RTR](#br-rtr) | Маршрутизатор BR |
-| [💻 HQ-SRV](#hq-srv) | DNS сервер |
-| [🖥️ BR-SRV](#br-srv) | Backup сервер |
-| [⌨️ HQ-CLI](#hq-cli) | Клиент |
-| [📡 Схема сети](#по-просьбе-сильно-желающих) | Картинка |
-
-</details>
+</p>
 
 ## Таблица IP-адресации
 
