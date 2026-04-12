@@ -52,9 +52,7 @@ echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sysctl -p
 </pre>
 
-<pre>
-apt install iptables iptables-persistent -y
-</pre>
+<pre>apt install iptables iptables-persistent -y</pre>
 
 <p>nano /etc/iptables/iptables.sh</p>
 <pre>
@@ -161,9 +159,7 @@ ttl 64
 
 <pre>service networking restart</pre>
 
-<pre>
-apt install iptables iptables-persistent -y
-</pre>
+<pre>apt install iptables iptables-persistent -y</pre>
 
 <p>nano /etc/iptables/iptables.sh</p>
 <pre>
@@ -194,6 +190,46 @@ chmod +x /etc/iptables/iptables.sh
 systemctl restart iptables
 service networking restart
 </pre>
+
+<pre>
+useradd -m -G sudo net_admin
+passwd net_admin
+</pre>
+
+<pre>apt install rfr</pre>
+
+<p>nano /etc/frr/daemons</p>
+<pre>
+ospfd=yes
+</pre>
+
+<pre>service frr restart</pre>
+
+<p>nano /etc/frr/frr.conf</p>
+<pre>
+configure terminal
+&#10;
+interface tun0
+ip ospf authentication
+ip ospf authentication-key P@ssw0rd
+no ip ospf network broadcast
+no ip ospf passive
+exit
+router ospf
+ospf router-id 1.1.1.1
+passive-interface default
+network 10.10.10.0/30 area 0
+network 192.168.100.0/27 area 0
+network 182.168.200.0/28 area 0
+area 0 authentication
+exit
+end
+write memory
+</pre>
+
+
+
+
 
 
 
