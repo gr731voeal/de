@@ -45,8 +45,9 @@ iface ens224 inet static
     address 172.16.2.1
     netmask 255.255.255.240
 </pre>
-# Применение настроек сети
-service networking restart
+
+<pre>service networking restart</pre>
+
 
 
 
