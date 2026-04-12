@@ -82,7 +82,22 @@ systemctl restart iptables
 service networking restart
 </pre>
 
+## HQ-RTR
 
+<p>nano /etc/apt/sources.list</p>
+<pre>Отключить диск</pre>
+
+<p>nano etc/resolv.conf</p>
+<pre>
+nameserver 8.8.8.8
+nameserver 192.168.100.2
+</pre>
+
+<pre>
+hostnamectl set-hostname hq-rtr.au-team.irpo
+newgrp
+timedatectl set-timezone Asia/Tomsk
+</pre>
 
 
 
