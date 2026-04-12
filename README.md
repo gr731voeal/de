@@ -31,3 +31,26 @@ hostnamectl set-hostname isp.au-team.irpo
 newgrp
 timedatectl set-timezone Asia/Tomsk
 </pre>
+
+<p>/etc/network/interfaces</p>
+<pre>
+auto ens192
+iface ens192 inet static
+    address 172.16.1.1
+    netmask 255.255.255.240
+
+auto ens224
+iface ens224 inet static
+    address 172.16.2.1
+    netmask 255.255.255.240
+</pre>
+
+
+
+
+
+
+
+
+
+
