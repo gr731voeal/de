@@ -1,25 +1,14 @@
-<table width="100%">
-<tr>
-<td width="25%" valign="top">
-
-## Навигация
-
-• [Таблица IP-адресации](#таблица-ip-адресации)<br>
-• [ISP](#isp)<br>
-• [HQ-RTR](#hq-rtr)<br>
-• [BR-RTR](#br-rtr)<br>
-• [HQ-SRV](#hq-srv)<br>
-• [BR-SRV](#br-srv)<br>
-• [HQ-CLI](#hq-cli)<br>
-• [Картинка](#по-просьбе-сильно-желающих)
-
-</td>
-<td width="75%" valign="top">
-
-
-</td>
-</tr>
-</table>
+<p align="center">
+  <b>Навигация:</b><br><br>
+  <a href="#таблица-ip-адресации">IP Table</a> &nbsp;|&nbsp;
+  <a href="#isp">ISP</a> &nbsp;|&nbsp;
+  <a href="#hq-rtr">HQ-RTR</a> &nbsp;|&nbsp;
+  <a href="#br-rtr">BR-RTR</a> &nbsp;|&nbsp;
+  <a href="#hq-srv">HQ-SRV</a> &nbsp;|&nbsp;
+  <a href="#br-srv">BR-SRV</a> &nbsp;|&nbsp;
+  <a href="#hq-cli">HQ-CLI</a> &nbsp;|&nbsp;
+  <a href="#по-просьбе-сильно-желающих">Картинка</a>
+</p>
 
 ## Таблица IP-адресации
 
