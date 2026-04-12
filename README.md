@@ -6,11 +6,11 @@
 | | к hq-cli | 192.168.200.1/28 | |
 | | к isp | 172.16.1.2/28 | |
 | | gre к br-rtr | 10.10.0.1/30 | |
-| **BR-RTR** | к br-srv | 192.168.0.1/27 | 172.16.2.1 |
+| **BR-RTR** | к br-srv | 192.168.0.1/28 | 172.16.2.1 |
 | | к isp | 172.16.2.2/28 | |
 | | gre к hq-rtr | 10.10.0.2/30 | |
 | **HQ-SRV** | к hq-rtr | 192.168.100.2/27 | 192.168.100.1 |
-| **BR-SRV** | к br-rtr | 192.168.0.2/27 | 192.168.0.1 |
+| **BR-SRV** | к br-rtr | 192.168.0.2/28 | 192.168.0.1 |
 | **HQ-CLI** | к hq-rtr | 192.168.200.2/28 | 192.168.200.1 |
 | **ISP** | к hq-rtr | 172.16.1.1/28 | |
 | | к br-rtr | 172.16.2.1/28 | |
@@ -309,7 +309,7 @@ iface ens192 inet static
 auto ens224
 iface ens224 inet static
     address 192.168.0.1
-    netmask 255.255.255.224
+    netmask 255.255.255.240
 &#10;
 auto tun0
 iface tun0 inet tunnel
@@ -389,7 +389,7 @@ router ospf
     ospf router-id 2.2.2.2
     passive-interface default
     network 10.10.0.0/30 area 0
-    network 192.168.0.0/27 area 0
+    network 192.168.0.0/28 area 0
     area 0 authentication
     exit
 &#10;
