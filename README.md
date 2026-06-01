@@ -28,6 +28,7 @@
 
 ## ISP
 ### Module 1
+
 <p>nano /etc/apt/sources.list</p>
 <pre>Отключить диск</pre>
 
@@ -76,6 +77,7 @@ systemctl start nftables
 </pre>
 
 ## HQ-RTR
+### Module 1
 
 <p>nano /etc/apt/sources.list</p>
 <pre>Отключить диск</pre>
@@ -244,6 +246,7 @@ systemctl enable isc-dhcp-server
 </pre>
 
 ## BR-RTR
+### Module 1
 
 <p>nano /etc/apt/sources.list</p>
 <pre>Отключить диск</pre>
@@ -361,6 +364,7 @@ vtysh -c "show ip ospf route"
 </pre>
 
 ## HQ-SRV
+### Module 1
 
 <p>nano /etc/apt/sources.list</p>
 <pre>Отключить диск</pre>
@@ -543,6 +547,7 @@ Banner /etc/ssh/bannermotd
 <pre>service sshd restart</pre>
 
 ## BR-SRV
+### Module 1
 
 <p>nano /etc/apt/sources.list</p>
 <pre>Отключить диск</pre>
@@ -591,11 +596,19 @@ Banner /etc/ssh/bannermotd
 <pre>service sshd restart</pre>
 
 ## HQ-CLI
+### Module 1
 
 <pre>
 hostnamectl set-hostname hq-cli.au-team.irpo
 newgrp
 timedatectl set-timezone Asia/Tomsk
+</pre>
+
+<pre>
+sudo su
+systemctl stop NetworkManager
+systemctl disable NetworkManager
+systemctl mask NetworkManager
 </pre>
 
 <pre>service networking restart</pre>
