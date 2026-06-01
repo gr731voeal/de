@@ -7,7 +7,6 @@
   <a href="#hq-srv">HQ-SRV</a> &nbsp;|&nbsp;
   <a href="#br-srv">BR-SRV</a> &nbsp;|&nbsp;
   <a href="#hq-cli">HQ-CLI</a> &nbsp;|&nbsp;
-  <a href="#по-просьбе-сильно-желающих">Картинка</a>
 </p>
 
 ## Таблица IP-адресации
@@ -426,17 +425,17 @@ zone "au-team.irpo" {
     type master;
     file "/etc/bind/db.au-team.irpo";
 };
-
+&#10;
 zone "100.168.192.in-addr.arpa" {
     type master;
     file "/etc/bind/db.192.168.100";
 };
-
+&#10;
 zone "0.168.192.in-addr.arpa" {
     type master;
     file "/etc/bind/db.192.168.0";
 };
-
+&#10;
 zone "200.168.192.in-addr.arpa" {
     type master;
     file "/etc/bind/db.192.168.200";
@@ -606,10 +605,3 @@ timedatectl set-timezone Asia/Tomsk
 
 <p>nano /etc/resolv.conf (если DHCP не передает DNS)</p>
 <pre>nameserver 192.168.100.2</pre>
-
-
-## По просьбе сильно желающих
-
-<p align="center">
-    <img width="553" height="386" alt="image" src="https://github.com/user-attachments/assets/d7246a28-74ee-45fa-a2ba-d67af781eb9d" />
-</p>
