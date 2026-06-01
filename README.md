@@ -105,9 +105,9 @@ sysctl -p
 <pre>
 auto ens192
 iface ens192 inet static
-    address 172.16.1.2
+    address 172.16.10.2
     netmask 255.255.255.240
-    gateway 172.16.1.1
+    gateway 172.16.10.1
 </pre>
 
 <pre>service networking restart</pre>
@@ -123,9 +123,9 @@ modprobe ip_gre
 <pre>
 auto ens192
 iface ens192 inet static
-    address 172.16.1.2
+    address 172.16.10.2
     netmask 255.255.255.240
-    gateway 172.16.1.1
+    gateway 172.16.10.1
 &#10;
 auto ens224 
 iface ens224 inet static 
@@ -137,14 +137,14 @@ iface ens224:1 inet static
     address 192.168.200.1
     netmask 255.255.255.240
 &#10;
-auto ens224.100
-iface ens224 inet static 
+auto ens224.111
+iface ens224.111 inet static 
     address 192.168.100.3
     netmask 255.255.255.224
     vlan-raw-device ens224
 &#10;
-auto ens224.200 
-iface ens224.200 inet static 
+auto ens224.211 
+iface ens224.211 inet static 
     address 192.168.200.3 
     netmask 255.255.255.240 
     vlan-raw-device ens224:1
@@ -154,8 +154,8 @@ iface tun0 inet tunnel
     address 10.10.0.1 
     netmask 255.255.255.252
     mode gre 
-    local 172.16.1.2
-    endpoint 172.16.2.2 
+    local 172.16.10.2
+    endpoint 172.16.20.2 
     ttl 64
 </pre>
 
@@ -277,9 +277,9 @@ modprobe ip_gre
 <pre>
 auto ens192
 iface ens192 inet static
-    address 172.16.2.2
+    address 172.16.20.2
     netmask 255.255.255.240
-    gateway 172.16.2.1
+    gateway 172.16.20.1
 &#10;
 auto ens224
 iface ens224 inet static
@@ -291,8 +291,8 @@ iface tun0 inet tunnel
     address 10.10.0.2
     netmask 255.255.255.252
     mode gre
-    local 172.16.2.2
-    endpoint 172.16.1.2
+    local 172.16.20.2
+    endpoint 172.16.10.2
     ttl 64
 </pre>
 
@@ -525,13 +525,13 @@ host 192.168.0.2
 </pre>
 
 <pre>
-useradd -m -u 2026 -G sudo sshuser
+useradd -m -u 2011 -G sudo sshuser
 passwd sshuser
 </pre>
 
 <p>nano /etc/ssh/sshd_config</p>
 <pre>
-Port 2026
+Port 2011
 PermitRootLogin no
 PasswordAuthentication yes
 AllowUsers sshuser
@@ -573,13 +573,13 @@ iface ens192 inet static
 <pre>service networking restart</pre>
 
 <pre>
-useradd -m -u 2026 -G sudo sshuser
+useradd -m -u 2011 -G sudo sshuser
 passwd sshuser
 </pre>
 
 <p>nano /etc/ssh/sshd_config</p>
 <pre>
-Port 2026
+Port 2011
 PermitRootLogin no
 PasswordAuthentication yes
 AllowUsers sshuser
