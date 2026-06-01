@@ -219,10 +219,7 @@ end
 write memory
 </pre>
 
-<pre>
-systemctl restart frr
-systemctl enable frr
-</pre>
+<pre>systemctl restart frr</pre>
 
 <pre>
 apt install isc-dhcp-server -y
@@ -359,10 +356,7 @@ end
 write memory
 </pre>
 
-<pre>
-systemctl restart frr
-systemctl enable frr
-</pre>
+<pre>systemctl restart frr</pre>
 
 <p>Проверка</p>
 <pre>
