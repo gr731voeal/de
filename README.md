@@ -26,8 +26,8 @@
 | **ISP** | к hq-rtr | 172.16.10.1/28 | |
 | | к br-rtr | 172.16.20.1/28 | |
 
+# Module 1
 ## ISP
-### Module 1
 
 <p>nano /etc/apt/sources.list</p>
 <pre>Отключить диск</pre>
@@ -77,7 +77,6 @@ systemctl start nftables
 </pre>
 
 ## HQ-RTR
-### Module 1
 
 <p>nano /etc/apt/sources.list</p>
 <pre>Отключить диск</pre>
@@ -246,7 +245,6 @@ systemctl enable isc-dhcp-server
 </pre>
 
 ## BR-RTR
-### Module 1
 
 <p>nano /etc/apt/sources.list</p>
 <pre>Отключить диск</pre>
@@ -364,7 +362,6 @@ vtysh -c "show ip ospf route"
 </pre>
 
 ## HQ-SRV
-### Module 1
 
 <p>nano /etc/apt/sources.list</p>
 <pre>Отключить диск</pre>
@@ -547,7 +544,6 @@ Banner /etc/ssh/bannermotd
 <pre>service sshd restart</pre>
 
 ## BR-SRV
-### Module 1
 
 <p>nano /etc/apt/sources.list</p>
 <pre>Отключить диск</pre>
@@ -594,9 +590,8 @@ Banner /etc/ssh/bannermotd
 <pre>Authorized access only</pre>
 
 <pre>service sshd restart</pre>
-
+ 
 ## HQ-CLI
-### Module 1
 
 <pre>
 hostnamectl set-hostname hq-cli.au-team.irpo
@@ -615,3 +610,74 @@ systemctl mask NetworkManager
 
 <p>nano /etc/resolv.conf (если DHCP не передает DNS)</p>
 <pre>nameserver 192.168.100.2</pre>
+
+# Module 2
+## BR-SRV
+
+### Module 2
+
+<pre>
+apt update
+apt install -y samba winbind libpam-winbind libnss-winbind libpam-krb5 krb5-config krb5-user krb5-kdc bind9
+</pre>
+
+<pre>
+realm: AU-TEAM.IRPO
+kdc: br-srv.au-team.irpo
+admin: br-srv.au-team.irpo
+</pre>
+
+<pre>
+systemctl stop samba-ad-dc smbd nmbd winbind 2>/dev/null
+systemctl disable samba-ad-dc smbd nmbd winbind 2>/dev/null
+mv /etc/samba/smb.conf /etc/samba/smb.conf.bak 2>/dev/null
+rm -rf /var/lib/samba/private/*
+</pre>
+
+<pre>
+echo "192.168.0.2 br-srv.au-team.irpo br-srv" >> /etc/hosts
+chattr -i /etc/resolv.conf
+cat > /etc/resolv.conf << 'EOF'
+search au-team.irpo
+nameserver 127.0.0.1
+EOF
+chattr +i /etc/resolv.conf
+</pre>
+
+<pre>
+samba-tool domain provision --use-rfc2307 --realm=AU-TEAM.IRPO --domain=AU-TEAM --adminpass='P@ssw0rd' --dns-backend=SAMBA_INTERNAL --function-
+level=2008_R2
+</pre>
+
+<pre>
+sed -i 's/dns forwarder = .*/dns forwarder = 192.168.100.2/' /etc/samba/smb.conf
+cp /var/lib/samba/private/krb5.conf /etc/krb5.conf
+</pre>
+
+<pre>
+systemctl unmask samba-ad-dc && systemctl enable samba-ad-dc && systemctl start samba-ad-dc
+</pre>
+
+<pre>
+samba-tool domain info 127.0.0.1
+host -t SRV _ldap._tcp.au-team.irpo
+</pre>
+
+<pre>
+samba-tool user create hquser1 'P@ssw0rd'
+samba-tool user create hquser2 'P@ssw0rd'
+samba-tool user create hquser3 'P@ssw0rd'
+samba-tool user create hquser4 'P@ssw0rd'
+samba-tool user create hquser5 'P@ssw0rd'
+</pre>
+
+<pre>
+samba-tool group add hq
+samba-tool group addmembers hq hquser1
+samba-tool group addmembers hq hquser2
+samba-tool group addmembers hq hquser3
+samba-tool group addmembers hq hquser4
+samba-tool group addmembers hq hquser5
+samba-tool group listmembers hq
+</pre>  
+
