@@ -188,11 +188,15 @@ passwd net_admin
 ospfd=yes
 </pre>
 
-<pre>service frr restart</pre>
+<pre>
+systemctl enable frr
+service frr restart
+</pre>
 
 <pre>vtysh</pre>
 <pre>
 configure terminal
+ip forwarding
 &#10;
 interface tun0
     ip ospf authentication
@@ -325,11 +329,15 @@ passwd net_admin
 ospfd=yes
 </pre>
 
-<pre>service frr restart</pre>
+<pre>
+systemctl enable frr
+service frr restart
+</pre>
 
 <pre>vtysh</pre>
 <pre>
 configure terminal
+ip forwarding
 &#10;
 interface tun0
     ip ospf authentication
