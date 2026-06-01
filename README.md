@@ -460,8 +460,8 @@ br-rtr  IN      A       192.168.0.1
 hq-srv  IN      A       192.168.100.2
 hq-cli  IN      A       192.168.200.2
 br-srv  IN      A       192.168.0.2
-docker  IN      A       172.16.1.1
-web     IN      A       172.16.2.1
+docker  IN      A       172.16.10.1
+web     IN      A       172.16.20.1
 </pre>
 
 <p>nano /etc/bind/db.192.168.100</p>
