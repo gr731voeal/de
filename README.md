@@ -614,19 +614,16 @@ systemctl mask NetworkManager
 # Module 2
 ## BR-SRV
 
-### Module 2
-
+<p>Пакеты</p>
 <pre>
 apt update
 apt install -y samba winbind libpam-winbind libnss-winbind libpam-krb5 krb5-config krb5-user krb5-kdc bind9
-</pre>
-
-<pre>
 realm: AU-TEAM.IRPO
 kdc: br-srv.au-team.irpo
 admin: br-srv.au-team.irpo
 </pre>
 
+<p>Стоп и чистка</p>
 <pre>
 systemctl stop samba-ad-dc smbd nmbd winbind 2>/dev/null
 systemctl disable samba-ad-dc smbd nmbd winbind 2>/dev/null
@@ -634,6 +631,7 @@ mv /etc/samba/smb.conf /etc/samba/smb.conf.bak 2>/dev/null
 rm -rf /var/lib/samba/private/*
 </pre>
 
+<p>Hosts + DNS</p>
 <pre>
 echo "192.168.0.2 br-srv.au-team.irpo br-srv" >> /etc/hosts
 chattr -i /etc/resolv.conf
@@ -644,25 +642,30 @@ EOF
 chattr +i /etc/resolv.conf
 </pre>
 
+<p>Провижн домена</p>
 <pre>
 samba-tool domain provision --use-rfc2307 --realm=AU-TEAM.IRPO --domain=AU-TEAM --adminpass='P@ssw0rd' --dns-backend=SAMBA_INTERNAL --function-
 level=2008_R2
 </pre>
 
+<p>Правка smb.conf + krb5</p>
 <pre>
 sed -i 's/dns forwarder = .*/dns forwarder = 192.168.100.2/' /etc/samba/smb.conf
 cp /var/lib/samba/private/krb5.conf /etc/krb5.conf
 </pre>
 
+<p>Запуск</p>
 <pre>
 systemctl unmask samba-ad-dc && systemctl enable samba-ad-dc && systemctl start samba-ad-dc
 </pre>
 
+<p>Проверка</p>
 <pre>
 samba-tool domain info 127.0.0.1
 host -t SRV _ldap._tcp.au-team.irpo
 </pre>
 
+<p>Пользователи</p>
 <pre>
 samba-tool user create hquser1 'P@ssw0rd'
 samba-tool user create hquser2 'P@ssw0rd'
@@ -671,6 +674,7 @@ samba-tool user create hquser4 'P@ssw0rd'
 samba-tool user create hquser5 'P@ssw0rd'
 </pre>
 
+<p>Группа</p>
 <pre>
 samba-tool group add hq
 samba-tool group addmembers hq hquser1
@@ -681,3 +685,13 @@ samba-tool group addmembers hq hquser5
 samba-tool group listmembers hq
 </pre>  
 
+## HQ-CLI
+
+<p>Пакеты</p>
+<pre>
+apt update
+apt  install -y samba winbind krb5-user libnss-winbind libpam-winbind
+realm: AU-TEAM.IRPO
+kdc: br-srv.au-team.irpo
+admin: br-srv.au-team.irpo
+</pre>
