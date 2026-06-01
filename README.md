@@ -32,10 +32,7 @@
 <pre>Отключить диск</pre>
 
 <p>nano etc/resolv.conf</p>
-<pre>
-nameserver 192.168.100.2
-nameserver 8.8.8.8
-</pre>
+<pre>nameserver 8.8.8.8</pre>
 
 <pre>
 hostnamectl set-hostname isp.au-team.irpo
