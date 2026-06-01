@@ -64,44 +64,19 @@ iface ens256 inet static
 
 <pre>service networking restart</pre>
 
-<pre>apt install iptables iptables-persistent -y</pre>
-
-<p>nano /etc/iptables/iptables.sh</p>
+<p>nano /etc/nftables.conf</p>
 <pre>
-#!/bin/bash
-&#10;
-iptables -F
-iptables -X
-iptables -t nat -F
-iptables -t nat -X
-&#10;
-iptables -P INPUT ACCEPT
-iptables -P FORWARD ACCEPT
-iptables -P OUTPUT ACCEPT
-&#10;
-iptables -t nat -A POSTROUTING -s 172.16.1.0/28 -o ens192 -j MASQUERADE
-iptables -t nat -A POSTROUTING -s 172.16.2.0/28 -o ens192 -j MASQUERADE
-&#10;
-iptables -A FORWARD -s 172.16.1.0/28 -i any -o ens192 -j ACCEPT
-iptables -A FORWARD -s 172.16.2.0/28 -i any -o ens192 -j ACCEPT
-iptables -A FORWARD -d 172.16.1.0/28 -i ens192 -o any -m state --state ESTABLISHED,RELATED -j ACCEPT
-iptables -A FORWARD -d 172.16.2.0/28 -i ens192 -o any -m state --state ESTABLISHED,RELATED -j ACCEPT
+table inet nat {
+    chain POSTROUTING {
+    type nat hook postrouting priority srcnat;
+    oifname "ens192" masquerade
+    }
+}
 </pre>
 
 <pre>
-chmod +x /etc/iptables/iptables.sh
-/etc/iptables/iptables.sh
-systemctl restart iptables
-service networking restart
-</pre>
-
-<p>Или же</p>
-<pre>
-iptables -t nat -A POSTROUTING -s 172.16.1.0/28 -o ens192 -j MASQUERADE
-iptables -t nat -A POSTROUTING -s 172.16.2.0/28 -o ens192 -j MASQUERADE
-iptables -A FORWARD -j ACCEPT
-
-netfilter-persistent save
+systemctl enable nftables
+systemctl start nftables
 </pre>
 
 ## HQ-RTR
