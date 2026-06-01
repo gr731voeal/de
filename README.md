@@ -443,7 +443,7 @@ zone "200.168.192.in-addr.arpa" {
 <pre>
 $TTL    604800
 @       IN      SOA     hq-srv.au-team.irpo. admin.au-team.irpo. (
-                  2026041201  ; Serial
+                  2026060201  ; Serial
                         604800  ; Refresh
                          86400  ; Retry
                        2419200  ; Expire
@@ -465,7 +465,7 @@ web     IN      A       172.16.20.1
 <pre>
 $TTL    604800
 @       IN      SOA     hq-srv.au-team.irpo. admin.au-team.irpo. (
-                  2026041201  ; Serial
+                  2026060201  ; Serial
                         604800  ; Refresh
                          86400  ; Retry
                        2419200  ; Expire
@@ -481,7 +481,7 @@ $TTL    604800
 <pre>
 $TTL    604800
 @       IN      SOA     hq-srv.au-team.irpo. admin.au-team.irpo. (
-                  2026041201  ; Serial
+                  2026060201  ; Serial
                         604800  ; Refresh
                          86400  ; Retry
                        2419200  ; Expire
@@ -497,7 +497,7 @@ $TTL    604800
 <pre>
 $TTL    604800
 @       IN      SOA     hq-srv.au-team.irpo. admin.au-team.irpo. (
-                  2026041201  ; Serial
+                  2026060201  ; Serial
                         604800  ; Refresh
                          86400  ; Retry
                        2419200  ; Expire
